@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item
+        android:id="@+id/nav_home"
+        android:title="Home"/>
+
+    <item
+        android:id="@+id/nav_favs"
+        android:title="Favourites"/>
+
+    <item
+        android:id="@+id/nav_popular"
+        android:title="Popular"/>
+
+    <item
+        android:id="@+id/nav_trending"
+        android:title="Trending"/>
+
+    <item
+        android:id="@+id/nav_setting"
+        android:title="Setting"/>
+
+    <item
+        android:id="@+id/nav_login"
+        android:title="Login"/>
+
+
+    <item
+        android:id="@+id/nav_share"
+        android:title="Share"/>
+
+    <item
+        android:id="@+id/nav_rate_us"
+        android:title="rate us"/>
+
+
+    <!--    <item-->
+<!--        android:id="@+id/nav_setting"-->
+<!--        android:title="Settings"/>-->
+
+<!--    <item android:title="Profile">-->
+
+<!--        <menu>-->
+
+
+<!--            <item-->
+<!--                android:id="@+id/nav_login"-->
+<!--                android:title="Login"/>-->
+
+<!--        </menu>-->
+
+<!--    </item>-->
+
+<!--    <item android:title="Communicate">-->
+
+<!--        <menu>-->
+
+<!--            <item-->
+<!--                android:id="@+id/nav_share"-->
+<!--                android:title="Share"/>-->
+
+<!--            <item-->
+<!--                android:id="@+id/nav_rate_us"-->
+<!--                android:title="Rate us"/>-->
+
+
+<!--        </menu>-->
+
+
+<!--    </item>-->
+
+</menu>
