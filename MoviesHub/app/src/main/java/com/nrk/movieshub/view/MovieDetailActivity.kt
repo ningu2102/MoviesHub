@@ -1,8 +1,7 @@
-package com.nrk.movieshub.View
+package com.nrk.movieshub.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.nrk.movieshub.R
 import com.nrk.movieshub.databinding.ActivityMainBinding
 
 class MovieDetailActivity : AppCompatActivity() {

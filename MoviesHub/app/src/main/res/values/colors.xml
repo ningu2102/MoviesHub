@@ -10,4 +10,8 @@
     <color name="g_black">#111822</color>
     <color name="g_red">#cc073c</color>
     <color name="g_white">#cfcdd1</color>
+
+    <color name="primary">#5f43ef</color>
+    <color name="lightPrimary">#8771f4</color>
+    <color name="darkPrimary">#3b2d86</color>
 </resources>

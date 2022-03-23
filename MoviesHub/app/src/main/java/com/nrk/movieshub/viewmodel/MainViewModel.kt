@@ -1,4 +1,4 @@
-package com.nrk.movieshub.ViewModel
+package com.nrk.movieshub.viewmodel
 
 import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
