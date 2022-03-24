@@ -16,7 +16,7 @@ interface MovieService {
     suspend fun fetchReviews(@Path("movie_id") id: Int): Response<ReviewListResponse>
 
     @GET("3/movie/now_playing?language=en-US&page=1")
-    suspend fun getNowPlaying() : Response<NowPlayingMoviesResponse>
+    suspend fun getNowPlaying(@Query("api_key") api_key: String) : Response<NowPlayingMoviesResponse>
 
     @GET("/3/genre/movie/list?")
     suspend fun getAllGenres(@Query("api_key") api_key: String) : Response<GenresResponse>

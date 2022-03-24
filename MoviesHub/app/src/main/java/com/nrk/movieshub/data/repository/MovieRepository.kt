@@ -5,4 +5,6 @@ import javax.inject.Inject
 
 class MovieRepository @Inject constructor(private val movieHelper: MovieHelper) {
     suspend fun getAllGenres(apikey: String) =  movieHelper.getAllGenres(apikey)
+
+    suspend fun getNowPlayingMovies(apikey: String) = movieHelper.getNowPlayingMovies(apikey)
 }

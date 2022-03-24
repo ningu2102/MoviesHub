@@ -20,7 +20,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "TBDB_API_KEY", API_KEY)
         //buildConfigField("String", "BASE_URL", BaseUrl)
-        buildConfigField 'String', 'BASE_URL', "\"https://api.themoviedb.org/3/\""
+        buildConfigField 'String', 'BASE_URL', "\"https://api.themoviedb.org/\""
     }
 
     buildTypes {
