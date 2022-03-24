@@ -9,5 +9,5 @@ interface MovieHelper {
 
     suspend fun getAllGenres(api_key: String) : Response<GenresResponse>
 
-    suspend fun getNowPlayingMovies(api_key: String) : Response<NowPlayingMoviesResponse>
+    suspend fun getNowPlayingMovies(api_key: String, page: Int) : Response<NowPlayingMoviesResponse>
 }

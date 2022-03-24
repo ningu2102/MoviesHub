@@ -1,5 +1,6 @@
 package com.nrk.movieshub.view.home.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,7 +14,8 @@ import androidx.recyclerview.widget.SnapHelper
 import com.nrk.movieshub.data.model.NowPlayingMovie
 import com.nrk.movieshub.databinding.FragmentHomeBinding
 import com.nrk.movieshub.utils.Status
-import com.nrk.movieshub.view.home.MainActivity
+import com.nrk.movieshub.view.MainActivity
+import com.nrk.movieshub.view.NowPlayingActivity
 import com.nrk.movieshub.view.home.adapters.NowPlayingAdapter
 import com.nrk.movieshub.view.utils.CarouselLayoutManager
 import com.nrk.movieshub.viewmodel.MainViewModel
@@ -31,7 +33,6 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = (activity as MainActivity).viewModel
-
     }
 
     override fun onCreateView(
@@ -40,20 +41,33 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-
-        if (viewModel.checkInternetConnection()) {
-            SetupRecyclerView()
-            binding.llData.visibility = View.VISIBLE
-            binding.llNoInternet.visibility = View.GONE
-        } else {
-            binding.llData.visibility = View.GONE
-            binding.llNoInternet.visibility = View.VISIBLE
-        }
-
+        SetUi()
         return binding.root
     }
 
-    private fun SetupRecyclerView() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        if (viewModel.checkInternetConnection()) {
+            viewModel.getNowPlayingMovies()
+            setObservers()
+        }
+    }
+
+    private fun SetUi() {
+        SetClicks()
+        SetupRecyclerViews()
+    }
+
+    private fun SetClicks(){
+        binding.txtSeeAllNowPlaying.setOnClickListener({
+            startActivity(Intent(activity, NowPlayingActivity::class.java))
+        })
+    }
+
+    private fun SetupRecyclerViews() {
+        SetupNowPlayingRecyclerView()
+    }
+
+    private fun SetupNowPlayingRecyclerView() {
         layoutManager = CarouselLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         binding.rvNowPlaying.layoutManager = layoutManager
 
@@ -64,14 +78,23 @@ class HomeFragment : Fragment() {
         binding.rvNowPlaying.adapter = nowPlayingAdapter
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        if (viewModel.checkInternetConnection()) {
-            viewModel.getNowPlayingMovies()
-            setObservers()
-        }
+    private fun setObservers() {
+        setAllGenreObserver()
+        setNowPlayingObserver()
     }
 
-    private fun setObservers() {
+    private fun setNowPlayingObserver() {
+        viewModel.nowPlayingMovies.observe(viewLifecycleOwner, Observer {
+            when (it.status) {
+                Status.SUCCESS -> {
+                    var nowPlayingMovies = it.data!!.nowPlayingMovies
+                    nowPlayingAdapter.setValue(data = nowPlayingMovies as ArrayList<NowPlayingMovie>)
+                }
+            }
+        })
+    }
+
+    private fun setAllGenreObserver() {
         viewModel.allGenres.observe(viewLifecycleOwner, Observer {
             when (it.status) {
                 Status.SUCCESS -> {
@@ -87,15 +110,6 @@ class HomeFragment : Fragment() {
                 Status.ERROR -> {
                     Log.d("HomeFragment", it.message.toString())
 
-                }
-            }
-        })
-
-        viewModel.nowPlayingMovies.observe(viewLifecycleOwner, Observer {
-            when (it.status) {
-                Status.SUCCESS -> {
-                    var nowPlayingMovies = it.data!!.nowPlayingMovies
-                    nowPlayingAdapter.setValue(data = nowPlayingMovies as ArrayList<NowPlayingMovie>)
                 }
             }
         })

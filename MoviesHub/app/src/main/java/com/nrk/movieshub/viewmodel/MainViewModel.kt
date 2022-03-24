@@ -62,7 +62,7 @@ class MainViewModel @ViewModelInject constructor(
         viewModelScope.launch {
             _nowPlayingMovies.value = Resource.loading(null)
             if (networkHelper.isNetworkConnected()) {
-                movieRepository.getNowPlayingMovies(BuildConfig.TBDB_API_KEY).let {
+                movieRepository.getNowPlayingMovies(BuildConfig.TBDB_API_KEY, 1).let {
                     if (it.isSuccessful) {
                         val allGenres = Resource.success(it.body())
                         allGenres.data!!.nowPlayingMovies.forEach {

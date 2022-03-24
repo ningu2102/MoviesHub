@@ -1,4 +1,4 @@
-package com.nrk.movieshub.view.home
+package com.nrk.movieshub.view
 
 import android.os.Bundle
 import androidx.activity.viewModels
